@@ -1,12 +1,15 @@
-function Get-AzApiToken {
-    <#
-    .SYNOPSIS
-        Refreshes the API token if required
+#Requires -module Az.Accounts
+function Get-Token {
+<#
+.SYNOPSIS
+    Refreshes the API token if required
 
-    .OUTPUTS
-    System.String - Refreshed API Token
+.OUTPUTS
+API Token Object
 
-    #>
+.NOTES
+Inspired by https://github.com/Azure/azure-powershell/issues/7525#issuecomment-432384270
+#>
 
     [CmdletBinding(SupportsShouldProcess)]
     param (
