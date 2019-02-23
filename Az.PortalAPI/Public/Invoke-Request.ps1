@@ -29,6 +29,8 @@ function Invoke-Request {
         #The base URI for the Portal API. Typically you don't need to change this
         [Uri]$baseURI = 'https://main.iam.ad.ext.azure.com/api/',
 
+        [URI]$requestOrigin = 'https://iam.hosting.portal.azure.net',
+
         #The request ID for the session. You can generate one with [guid]::NewGuid().guid.
         #Typically you only specify this if you're trying to retry an operation and don't want to duplicate the request, such as for a POST operation
         $requestID = [guid]::NewGuid().guid
@@ -48,6 +50,8 @@ function Invoke-Request {
             Authorization = 'Bearer ' + $apiToken.AccessToken.tostring()
             'Content-Type' = 'application/json'
             'x-ms-client-request-id' = $requestID
+            'Host' = $baseURI.Host
+            'Origin' = 'https://iam.hosting.portal.azure.net'
         }
         Body = $Body
     }
